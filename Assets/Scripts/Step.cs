@@ -5,6 +5,7 @@ public class Step : MonoBehaviour
     #region Variables
 
     public string DebugHeaderText;
+    public string LocationText;
 
     [TextArea(4, 8)]
     public string DescriptionText;

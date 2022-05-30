@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _headerLabel;
+    [SerializeField] private TextMeshProUGUI _locationLabel;
     [SerializeField] private TextMeshProUGUI _descriptionLabel;
     [SerializeField] private TextMeshProUGUI _choicesLabel;
     [SerializeField] private Button _menuButton;
@@ -19,8 +20,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneLoader _sceneLoader;
     [SerializeField] private string _menuSceneName;
     [SerializeField] private string _gameOverSceneName;
+    [SerializeField] private string _gameWinSceneName;
 
     private Step _currentStep;
+    private int _i;
 
     #endregion
 
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         CheckGameOver();
+        CheckGameWin();
         int choiceIndex = GetPressedButtonIndex();
 
         if (!IsIndexValid(choiceIndex))
@@ -73,6 +77,7 @@ public class GameManager : MonoBehaviour
         _currentStep = step;
 
         _headerLabel.text = step.DebugHeaderText;
+        _locationLabel.text = step.LocationText;
         _descriptionLabel.text = step.DescriptionText;
         _choicesLabel.text = step.ChoicesText;
     }
@@ -84,11 +89,21 @@ public class GameManager : MonoBehaviour
 
     private void CheckGameOver()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(KeyCode.Return))
             return;
         if (_currentStep.Choices.Length == 0)
         {
             _sceneLoader.LoadScene(_gameOverSceneName);
+        }
+    }
+
+    private void CheckGameWin()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            return;
+        if (_currentStep.Choices.Length == 10)
+        {
+            _sceneLoader.LoadScene(_gameWinSceneName);
         }
     }
 
