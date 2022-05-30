@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
 
 public class GameManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _descriptionLabel;
     [SerializeField] private TextMeshProUGUI _choicesLabel;
     [SerializeField] private Button _menuButton;
+    [SerializeField] private Image _spriteImage;
 
     [Header("Initial Setup")]
     [SerializeField] private Step _startStep;
@@ -78,6 +80,15 @@ public class GameManager : MonoBehaviour
 
         _headerLabel.text = step.DebugHeaderText;
         _locationLabel.text = step.LocationText;
+
+        if (step.LocationImage != null)
+        {
+            _spriteImage.color = Color.white;
+            _spriteImage.sprite = step.LocationImage;
+        }
+        else
+            _spriteImage.color = new Color(0, 0, 0, 0);
+
         _descriptionLabel.text = step.DescriptionText;
         _choicesLabel.text = step.ChoicesText;
     }

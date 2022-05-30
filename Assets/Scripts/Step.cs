@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Step : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class Step : MonoBehaviour
 
     public string DebugHeaderText;
     public string LocationText;
+
+    public Sprite LocationImage;
 
     [TextArea(4, 8)]
     public string DescriptionText;
